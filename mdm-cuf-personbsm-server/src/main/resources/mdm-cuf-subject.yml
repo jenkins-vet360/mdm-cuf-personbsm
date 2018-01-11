@@ -1,0 +1,60 @@
+# SUBJECT APP CONFIG
+# This is the subject application config
+# store config here custom to this app and/or overrides of config in mdm-cuf-core-server.yml
+#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------
+
+#---------------------------------------------------------------------------------------------------------------------
+# DEFAULT CONFIG
+# The default config contains global configs that apply under all profiles, unless overridden (which should be rare).
+#---------------------------------------------------------------------------------------------------------------------
+spring: 
+  # by default, if no profile is explicitly activated, we run env env ENV-LOCAL-DEV
+  profiles.active: ENV-LOCAL-DEV
+  # this app should always run in MODE_UTIL_MICROSERVICE
+  profiles.include: MODE-UTIL-MICROSERVICE
+  
+# properties rendered in the /info endpoint
+info.mdm-cuf-personbsm-server:
+    version:  "@project.version@"
+    artifact: "@project.artifactId@"
+    name: "@project.name@"
+    description: "@project.description@"
+
+mdm-cuf: 
+  instance-system-name: PERSONBSM
+
+  
+# default port if running as a spring-boot app (not a deployed war) and not overriding    
+server.port: 8084
+
+
+mdm-cuf-personbsm:
+    demo-property-one: thisIsAnExampleProperty      
+---
+#---------------------------------------------------------------------------------------------------------------------
+# ENV-LOCAL-DEV PROFILE
+# the default profile, uses mocks for various external touch points such as the database, bypasses queue integration
+# standard config likely reusable as-is, thus included in core-server
+#---------------------------------------------------------------------------------------------------------------------
+spring:
+  profiles: ENV-LOCAL-DEV
+  
+---
+#---------------------------------------------------------------------------------------------------------------------
+# ENV-CI-DEV PROFILE
+# Profile for the highly controlled CI env where we run all checked in code integration tests against fully controlled infrastructure
+#---------------------------------------------------------------------------------------------------------------------
+spring:
+  profiles: ENV-CI-DEV
+  profiles.include: PARTNER-SIM
+
+---
+
+#---------------------------------------------------------------------------------------------------------------------
+# ENV-PROD PROFILE
+# Profile for the prod environment.
+#---------------------------------------------------------------------------------------------------------------------
+spring:
+  profiles: ENV-PROD

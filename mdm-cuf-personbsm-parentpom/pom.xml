@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>mdm.cuf.core</groupId>
+		<artifactId>mdm-cuf-core-parentpom</artifactId>
+		<version>1.0.0-SNAPSHOT</version>								<!-- READ AND HEED: this should match mdm-cuf-core.version property below. -->
+		<relativePath />
+	</parent>
+
+	<artifactId>mdm-cuf-personbsm-parentpom</artifactId>
+	<groupId>mdm.cuf.personbsm</groupId>
+	<packaging>pom</packaging>
+	<name>mdm-cuf-personbsm-parentpom</name>
+	<description>Parent POM</description>
+	
+	<properties>
+		<mdm-cuf-core.version>1.0.0-SNAPSHOT</mdm-cuf-core.version> 		<!-- READ AND HEED: this should match the parent pom version above. -->
+		<mdm-cuf-personbsm.version>1.0.0-SNAPSHOT</mdm-cuf-personbsm.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+		
+		    <!-- mdm-cuf-personbsm dependencies -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>mdm-cuf-personbsm-api-validators</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>mdm-cuf-personbsm-api-validators</artifactId>
+                <version>${project.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>mdm-cuf-personbsm-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>mdm-cuf-personbsm-api</artifactId>
+                <version>${project.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:mdm="http://www.va.gov/mdm-cuf/schema/v1"
+           xmlns="http://www.va.gov/mdm-cuf/bio/person/v1"
+           targetNamespace="http://www.va.gov/mdm-cuf/bio/person/v1"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+           xmlns:annox="http://annox.dev.java.net" 
+           jaxb:extensionBindingPrefixes="annox"
+           xmlns:s="http://annox.dev.java.net/io.swagger.annotations">
+
+
+    <!--************************************************************************************************************************************
+        CORE OBJECTS
+        we don't generate this, it comes out of mdm-cuf-core.  however, it's needed as it's the top of our object graph
+    *************************************************************************************************************************************-->
+    <xs:complexType abstract="true" name="abstractBio" />
+    <xs:complexType name="serviceResponse" />
+    <xs:complexType name="serviceRequest" />
+    <xs:complexType name="message" />
+    <!-- END CORE OBJECT REFERENCE -->
+    
+    <!--************************************************************************************************************************************
+        MODEL OBJECTS
+    *************************************************************************************************************************************-->
+     
+    <xs:complexType name="PersonBsmErrorRequest">
+        <xs:complexContent>
+            <xs:extension base="serviceRequest">
+            <xs:sequence>
+                <xs:element name="txAuditId" type="xs:string" minOccurs="1">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <annox:annotate  target="field"><s:ApiModelProperty required="true" value="This is the txAuditId within the caller's system in case we want to track/correlate against this (Unsure if this is desired/needed)."/></annox:annotate>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="preValidationPersonBio" type="personBio" minOccurs="1">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <annox:annotate  target="field"><s:ApiModelProperty required="true" value="This is the original person bio prior to any changes during validation and enrichment."/></annox:annotate>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>  
+                <xs:element name="postValidationPersonBio" type="personBio" minOccurs="0">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <annox:annotate  target="field"><s:ApiModelProperty value="This is the person bio after it passed through validation and enrichment."/></annox:annotate>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element> 
+                <xs:element name="personIdentityBio" type="personIdentityBio" minOccurs="1">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <annox:annotate  target="field"><s:ApiModelProperty required="true" value="This is the person identity bio containing other identity elements."/></annox:annotate>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element> 
+                <xs:element name="messages" type="message" minOccurs="1" maxOccurs="500">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <annox:annotate  target="field"><s:ApiModelProperty required="true" value="This is the collection of messages that convey what errors occurred."/></annox:annotate>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>   
+             </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+     
+    <xs:complexType name="PersonBsmErrorResponse">
+        <xs:complexContent>
+            <xs:extension base="serviceResponse">
+            <xs:sequence>
+                
+             </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="PersonBsmCorrectedBioRequest">
+        <xs:complexContent>
+            <xs:extension base="serviceRequest">
+                <xs:sequence>
+                    <xs:element name="txAuditId" type="xs:string" minOccurs="1">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <annox:annotate  target="field"><s:ApiModelProperty required="true" value="This is the txAuditId within the caller's system in case we want to track/correlate against this (Unsure if this is desired/needed)."/></annox:annotate>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="errorBioId" type="xs:string" minOccurs="1"/>
+                    <xs:element name="isOverridden" type="xs:boolean" minOccurs="1"/>
+                    <xs:element name="addresses" type="addressBio" minOccurs="0" />
+                    <xs:element name="telephones" type="telephoneBio" minOccurs="0" />
+                    <xs:element name="emails" type="emailBio" minOccurs="0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+     
+     
+    <!--************************************************************************************************************************************
+        MODEL OBJECTS COPY/PASTED FROM PERSON
+        NOTE:  This is temporary, straight copy/pasted from the Person project's schema until we define the strategy for sharing schemas.
+         We can easily remove this if we want to stop generating and declare a Maven dependency but that isn't the ideal approach either. 
+    *************************************************************************************************************************************-->
+    <xs:complexType abstract="true" name="personContactBase">
+    	<xs:complexContent>
+    		<xs:extension base="abstractBio">
+                <xs:sequence>
+                    <xs:element name="effectiveStartDate" type="xs:dateTime" minOccurs="0">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <annox:annotate  target="field"><s:ApiModelProperty value="Dates must be in format yyyy-MM-dd'T'HH:mm:ss"/></annox:annotate>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>  
+                    <xs:element name="effectiveEndDate" type="xs:dateTime" minOccurs="0">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <annox:annotate  target="field"><s:ApiModelProperty value="Dates must be in format yyyy-MM-dd'T'HH:mm:ss"/></annox:annotate>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="confirmationDate" type="xs:dateTime" minOccurs="0">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <annox:annotate  target="field"><s:ApiModelProperty value="Dates must be in format yyyy-MM-dd'T'HH:mm:ss"/></annox:annotate>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>    
+    	</xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="personBio">
+    	<xs:complexContent>
+            <xs:extension base="abstractBio">
+                <xs:sequence>
+                    <!-- feature file has personId as required, but set to optional for now -->
+                    <xs:element name="vet360Id" type="xs:long" minOccurs="0"/>
+                    <xs:element name="addresses" type="addressBio" minOccurs="0" maxOccurs="100"/>
+                    <xs:element name="telephones" type="telephoneBio" minOccurs="0" maxOccurs="100"/>
+                    <xs:element name="emails" type="emailBio" minOccurs="0" maxOccurs="100"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="telephoneBio">
+        <xs:complexContent>
+            <xs:extension base="personContactBase">
+                <xs:sequence>
+                    <xs:element name="vet360Id" type="xs:long" minOccurs="0"/>
+                    <xs:element name="telephoneId" type="xs:long" minOccurs="0"/>
+                    <xs:element name="internationalIndicator" type="xs:boolean" minOccurs="1"/>
+                    <xs:element name="phoneType" type="telephoneType" minOccurs="1"/>
+                    <xs:element name="countryCode" type="xs:string" minOccurs="0"/>
+                    <xs:element name="areaCode" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="3"/>
+                                <xs:maxLength value="3"/>
+                                <xs:pattern value="[0-9]+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="phoneNumber" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                                <xs:maxLength value="14"/>
+                                <xs:pattern value="[^a-zA-Z]+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="phoneNumberExt" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                                <xs:maxLength value="10"/>
+                                <xs:pattern value="^[a-zA-Z0-9]+$"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="connectionStatusCode" type="telephoneConnectionStatusCode" minOccurs="0"/>
+                    <xs:element name="textMessageCapableInd" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="textMessagePermInd" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="voiceMailAcceptableInd" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="ttyInd" type="xs:boolean" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="emailBio">
+        <xs:complexContent>
+            <xs:extension base="personContactBase">
+                <xs:sequence>
+                    <xs:element name="vet360Id" type="xs:long" minOccurs="0"/>
+                    <xs:element name="emailId" type="xs:long" minOccurs="0"/>
+                    <xs:element name="emailAddressText" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                                <xs:maxLength value="255"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="emailPermInd" type="xs:boolean" minOccurs="0"/>
+                    <xs:element name="emailStatusCode" type="emailStatusCode" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="addressBio">
+        <xs:complexContent>
+            <xs:extension base="personContactBase">
+                <xs:sequence>
+                    <xs:element name="vet360Id" type="xs:long" minOccurs="0"/>
+                    <xs:element name="addressId" type="xs:long" minOccurs="0"/>
+                    <xs:element name="addressType" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="35"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="addressPOU" type="addressPOU" minOccurs="1"/>
+                    <xs:element name="badAddressIndicator" minOccurs="0">
+                    	<xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="35"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="addressLine1" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="addressLine2" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="addressLine3" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="cityName" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                                <xs:pattern value="^[a-zA-Z ]+$"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="stateCode" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="2"/>
+                                <xs:maxLength value="2"/>
+                                <xs:pattern value="^[a-zA-Z]+$"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="zipCode5" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="5"/>
+                                <xs:maxLength value="5"/>
+                                <xs:pattern value="[0-9]+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="zipCode4" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="4"/>
+                                <xs:maxLength value="4"/>
+                                <xs:pattern value="[0-9]+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="county" type="County" minOccurs="0"/>
+                    <xs:element name="provinceName" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                                <xs:pattern value="^[a-zA-Z]+$"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="intPostalCode" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="countryName" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="35"/>
+                                <xs:pattern value="^[a-zA-Z ]+$"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="countryCodeFIPS" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="3"/>
+                                <xs:pattern value="^[a-zA-Z]+$"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="countryCodeISO2" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="3"/>
+                                <xs:pattern value="^[a-zA-Z]+$"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="countryCodeISO3" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="3"/>
+                                <xs:pattern value="^[a-zA-Z]+$"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="confidenceScore" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="3"/>
+                                <xs:pattern value="[0-9]+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="latitude" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="35"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="longitude" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="35"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="geocodePrecision" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="35"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="geocodeDate" type="xs:dateTime" minOccurs="0">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <annox:annotate  target="field"><s:ApiModelProperty value="Dates must be in format yyyy-MM-dd'T'HH:mm:ss"/></annox:annotate>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>  
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="telephoneType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MOBILE"/>
+            <xs:enumeration value="HOME"/>
+            <xs:enumeration value="WORK"/>
+            <xs:enumeration value="FAX"/>
+            <xs:enumeration value="TEMPORARY"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="telephoneConnectionStatusCode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NO_KNOWN_PROBLEM"/>
+            <xs:enumeration value="NO_ANSWER"/>
+            <xs:enumeration value="NON_WORKING_NUMBER"/>
+            <xs:enumeration value="NOT_CORRECT_NUMBER"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="emailStatusCode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NO_KNOWN_PROBLEM"/>
+            <xs:enumeration value="RETURNED_UNDELIVERABLE"/>
+            <xs:enumeration value="INCORRECT_ADDRESS"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="addressPOU">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="RESIDENCE/CHOICE"/>
+            <xs:enumeration value="CORRESPONDENCE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+	<xs:complexType name="CountryResponse">
+        <xs:complexContent>
+            <xs:extension base="serviceResponse">
+            <xs:sequence>
+                <xs:element name="countryList" type="Country" maxOccurs="500"/>
+             </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="Country">
+       <xs:sequence>
+           <xs:element name="countryName" type="xs:string"/>
+           <xs:element name="countryCodeISO2" type="xs:string"/>
+           <xs:element name="countryCodeISO3" type="xs:string"/>
+           <xs:element name="countryCodeFIPS" type="xs:string"/>
+        </xs:sequence>
+	</xs:complexType>
+    
+    <xs:complexType name="StateResponse">
+        <xs:complexContent>
+            <xs:extension base="serviceResponse">
+            <xs:sequence>
+                <xs:element name="stateList" type="State" maxOccurs="500"/>
+             </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+	</xs:complexType>
+	
+    <xs:complexType name="State">
+       <xs:sequence>
+           <xs:element name="stateName" type="xs:string"/>
+           <xs:element name="stateCode" type="xs:string"/>
+        </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CountyResponse">
+        <xs:complexContent>
+            <xs:extension base="serviceResponse">
+            <xs:sequence>
+                <xs:element name="countyList" type="County" maxOccurs="5000"/>
+             </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="County">
+       <xs:sequence>
+           <xs:element name="countyName" type="xs:string">
+				<xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="35"/>
+                            <xs:pattern value="^[a-zA-Z ]+$"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+           <xs:element name="countyCode" type="xs:string">
+           		<xs:simpleType>
+                        <xs:restriction base="xs:string">
+                        	<xs:minLength value="5"/>
+                            <xs:maxLength value="5"/>
+                            <xs:pattern value="[0-9]+"/>
+                        </xs:restriction>
+                </xs:simpleType>
+           </xs:element>
+        </xs:sequence>
+	</xs:complexType>
+	
+	    <xs:complexType name="ZipCode5Response">
+        <xs:complexContent>
+            <xs:extension base="serviceResponse">
+            <xs:sequence>
+                <xs:element name="zipCode5List" type="ZipCode5" maxOccurs="45000"/>
+             </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+	</xs:complexType>
+	
+    <xs:complexType name="ZipCode5">
+       <xs:sequence>
+           <xs:element name="zipCode5" type="xs:string"/>
+        </xs:sequence>
+	</xs:complexType>
+   
+    <xs:complexType name="personIdentityBio">
+    	<xs:complexContent>
+            <xs:extension base="abstractBio">
+                <xs:sequence>
+                    <!-- feature file has personId as required, but set to optional for now -->
+                    <xs:element name="vet360Id" type="xs:long"  minOccurs="0"/>
+                    <xs:element name="mviCorrelations" type="xs:string" minOccurs="0" maxOccurs="100"/>
+                    <xs:element name="otherIdentifiers" type="correlatedIdentifier"/>
+                    <xs:element name="firstName" type="xs:string" minOccurs="0"/>
+                    <xs:element name="middleName" type="xs:string" minOccurs="0"/>
+                    <xs:element name="lastName" type="xs:string" minOccurs="0"/>
+                    <xs:element name="gender" type="xs:string" minOccurs="0"/>
+                    <xs:element name="dob" type="xs:dateTime" minOccurs="0"/>  
+                    <xs:element name="correlationTimeMillis" type="xs:long" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    
+    <xs:complexType name="correlatedIdentifier">
+            <xs:sequence>
+                <xs:element name="vet360Id" type="xs:string" minOccurs="0"/>
+                <xs:element name="icn" type="xs:string" minOccurs="0"/>
+                <xs:element name="enrollmentIen" type="xs:string" minOccurs="0"/>
+                <xs:element name="edipn" type="xs:string" minOccurs="0"/>
+                <xs:element name="pid" type="xs:string" minOccurs="0"/>
+                <xs:element name="filenumber" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+    </xs:complexType>
+    
+</xs:schema>

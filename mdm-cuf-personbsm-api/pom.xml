@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+        <groupId>mdm.cuf.personbsm</groupId>
+        <artifactId>mdm-cuf-personbsm-parentpom</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../mdm-cuf-personbsm-parentpom</relativePath>
+    </parent>
+
+    <artifactId>mdm-cuf-personbsm-api</artifactId>
+    <packaging>jar</packaging>
+    <name>mdm-cuf-personbsm-api</name>
+    <description>PersonBsm API Jar</description>
+	
+	<dependencies>
+		<!-- these needs to stay to a min, dep on core only cause this jar could go to a Java client -->
+		
+		<!-- mdm-cuf-core dependencies -->
+		<dependency>
+		    <groupId>mdm.cuf.core</groupId>
+		    <artifactId>mdm-cuf-core</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>mdm.cuf.core</groupId>
+		    <artifactId>mdm-cuf-core</artifactId>
+		    <type>test-jar</type>
+		    <scope>test</scope>
+		</dependency>
+		
+		<!-- mdm-cuf-person dependencies -->
+		<dependency>
+		    <groupId>${project.groupId}</groupId>
+		    <artifactId>mdm-cuf-personbsm-api-validators</artifactId>
+		</dependency>
+		
+		<!-- 3rd party commons dependencies -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<build>
+        <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.13.1</version>
+                <configuration>
+					<bindingDirectory>${project.basedir}/src/main/resources</bindingDirectory>
+					<bindingIncludes>
+						<include>JAXB-bindings.xjb</include>
+					</bindingIncludes>
+					<strict>false</strict>
+					<extension>true</extension>
+					<args>
+						<arg>-no-header</arg>
+						<arg>-XReplacePrimitives</arg>
+						<arg>-XJsr303Annotations</arg>
+						<arg>-Xannotate</arg>
+						<arg>-Xinheritance</arg>
+					</args>
+					<plugins>
+						<plugin>
+							<groupId>com.github.krasa</groupId>
+							<artifactId>krasa-jaxb-tools</artifactId>
+							<version>1.5</version>
+						</plugin>
+						<plugin>
+			                <groupId>org.jvnet.jaxb2_commons</groupId>
+			                <artifactId>jaxb2-basics-annotate</artifactId>
+			                <version>1.0.2</version>
+			            </plugin>
+			            <plugin>
+			                <groupId>org.jvnet.jaxb2_commons</groupId>
+			                <artifactId>jaxb2-basics</artifactId>
+			                <version>0.8.4</version>
+			            </plugin>
+					</plugins>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>${project.groupId}</groupId>
+		    			<artifactId>mdm-cuf-personbsm-api-validators</artifactId>
+		    			<version>${project.version}</version>				
+					</dependency>
+				</dependencies>
+                <executions>
+                	<!-- to introduce a new schema/model, copy/paste this entire execution, give it a new id
+                		such as v2, give new package like v2 and new include schema directory such as v2 -->
+                    <execution>
+                    	<id>xjc-v1</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+							<generatePackage>mdm.cuf.personbsm.api</generatePackage>
+							<schemas>
+								<schema>
+									<dependencyResource>
+										<groupId>${project.groupId}</groupId>
+		    							<artifactId>mdm-cuf-personbsm-api-validators</artifactId>
+										<resource>xsd/personbsm/v1/personbsm.xsd</resource>
+									</dependencyResource>
+								</schema>
+							</schemas>
+						</configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+	</build>
+
+</project>

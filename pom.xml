@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>mdm.cuf.personbsm</groupId>
+		<artifactId>mdm-cuf-personbsm-parentpom</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>./mdm-cuf-personbsm-parentpom</relativePath>
+	</parent>
+	
+	<artifactId>mdm-cuf-personbsm-all</artifactId>
+	<packaging>pom</packaging>
+	<name>${project.artifactId}</name>
+	<description>Maven PersonBSM Microservice Reactor Pom</description>
+	
+	<modules>
+		<module>mdm-cuf-personbsm-parentpom</module>
+        <module>mdm-cuf-personbsm-api-validators</module>
+        <module>mdm-cuf-personbsm-api</module>
+		<module>mdm-cuf-personbsm-server</module>
+	</modules>
+	
+</project>

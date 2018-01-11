@@ -1,0 +1,14 @@
+API Questions & Cleanup
+-----------------------
+- Why aren't the optional/required in swagger showing up properly?
+- The PersonBio error codes aren't correct in the error keys HTML.  We need to solve this, likely through getting that
+person.xsd separated out in our project, and when we generate it we should omit generating it's JSR 303.  Or research
+if there is some other way to not @Valid recurse the graph.  Or maybe we simply don't use JSR 303 validation in this
+project since validation is simple and we just return back constants for the few checks we have.
+- When we get a correction back from BSM, how do we sync it back up with the correct address/telephone/email on the PersonBIO?
+    - What ID does our app send to BSM for this?
+- How to handle overridden bio coming back from BSM?
+
+
+WADL Address for BSM RESTful service:
+http://10.200.97.20:8080/rest/Exception_Webservice_DEMO?_wadl
