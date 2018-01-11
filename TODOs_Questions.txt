@@ -11,9 +11,4 @@ project since validation is simple and we just return back constants for the few
 
 
 WADL Address for BSM RESTful service:
-<<<<<<< HEAD
 http://10.200.97.20:8080/rest/Exception_Webservice_DEMO?_wadl
-
-=======
-http://10.200.97.20:8080/rest/Exception_Webservice_DEMO?_wadl   
->>>>>>> 5b6b0ca89db3bd462ba3edb60db5e9bc1951c244
