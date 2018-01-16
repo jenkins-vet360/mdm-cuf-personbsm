@@ -5,7 +5,7 @@
 #	-changed correlationTimeMillis type to	#
 #	datetime				#
 #	- removed IOC column from object	#
-
+#################################################
 
 
 Feature: the request and response objects for the BSM will be identical, this feature defines what this request/ response looks like
