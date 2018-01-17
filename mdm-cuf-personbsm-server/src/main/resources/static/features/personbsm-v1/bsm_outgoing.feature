@@ -1,3 +1,12 @@
+#################################################
+#  Drafted 1/12/2018 by Rachel Fulton		#
+#  Reviewed by Amy Rosenthal 1/15/2018		#
+#  Edits Made on 1/16/2017:			#
+#	-Changed Source System from Vet360 to Vet360BSM	#
+#################################################
+
+
+
 Feature: The operations that are going to take place as an exception leaves the queue
 Scenario Outline: Reconstitute a BIO
 Given A BIO exception record is resolved
