@@ -6,6 +6,7 @@
 #	-changed correlationTimeMillis type to	#
 #	datetime				#
 #	- removed IOC column from object	#
+#-Removed CUFError code #
 #################################################
 
 Feature: Listening to the error queue and transforming the BIOs in the exception queue to something that can be consumed by the BSM
@@ -142,6 +143,7 @@ Examples:
       | ADDR300      | The Effective End Date has passed, you cannot modify an existing inactive record                             | 
   
   
+#add extra purposes of use
 
 Scenario Outline: Splitting and Storing BIOS
 Given An update containing "<biosEntering>" comes into the BSM
@@ -221,6 +223,7 @@ Examples:
       | mviAddress           | 
       | mviPhone             | 
       | mviDOB               | 
+  # Provide concatinations
   
   
 
