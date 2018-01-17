@@ -1,3 +1,13 @@
+
+#################################################
+#  Drafted 1/12/2018 by Rachel Fulton		#
+#  Reviewed by Amy Rosenthal 1/15/2018		#
+#  Edits Made on 1/16/2017:			#
+#	-changed correlationTimeMillis type to	#
+#	datetime				#
+#	- removed IOC column from object	#
+#################################################
+
 Feature: Listening to the error queue and transforming the BIOs in the exception queue to something that can be consumed by the BSM
 
 Scenario Outline:
@@ -215,7 +225,4 @@ Examples:
   
 
 
-  ########################################################
-  # to Add: what is being sent in- not determined yet    #
-  ########################################################
 
