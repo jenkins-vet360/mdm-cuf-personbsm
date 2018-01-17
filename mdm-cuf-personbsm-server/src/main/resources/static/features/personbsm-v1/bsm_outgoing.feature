@@ -30,9 +30,9 @@ Then following "<change>" will be made to the "<values>"
 Examples:
 | values                  |   change |
 | originatingSourceSystem | No Change |
-| sourceSystem            | Vet360 |
+| sourceSystem            | Vet360BSM |
 | sourceDate              | time the record exits the BSM in YYYY-MM-DDTHH:MM:SSZ format |
-|  confDate               | Date the record exits the BSM in YYYY-MM-DD|
+
 
 
 
