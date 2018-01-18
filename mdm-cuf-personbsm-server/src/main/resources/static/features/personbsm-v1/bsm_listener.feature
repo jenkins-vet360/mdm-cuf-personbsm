@@ -157,8 +157,8 @@ Examples:
 | biosEntering          | biosWithErrors        | biosStored      | callToBSM1 | callToBSM2 | callToBSM3 |
 | email, phone, address | email, phone, address |                 | email      | phone      | address    |
 | email, address        | email                 | address         | email      |            |            |
-| phone, address        | phone, address        | null            | phone      |  address   |            |
-| email                 | email                 | null            | email      |            |            |
+| phone, address        | phone, address        |                 | phone      | address    |            |
+| email                 | email                 |                 | email      |            |            |
 
 
  Scenario Outline: Hints in other exceptions
@@ -220,7 +220,7 @@ Examples:
       | mviFullName          | 
       | mviMothersMaidenName | 
       | mviGender            | 
-      | mviAddress           | 
+      | mviSSNLast4          |
       | mviPhone             | 
       | mviDOB               | 
   # Provide concatinations
