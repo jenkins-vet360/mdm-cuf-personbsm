@@ -464,7 +464,7 @@
 	
 	<xs:complexType name="County">
        <xs:sequence>
-           <xs:element name="countyName" type="xs:string">
+           <xs:element name="countyName">
 				<xs:simpleType>
                         <xs:restriction base="xs:string">
                             <xs:maxLength value="35"/>
@@ -472,7 +472,7 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-           <xs:element name="countyCode" type="xs:string">
+           <xs:element name="countyCode">
            		<xs:simpleType>
                         <xs:restriction base="xs:string">
                         	<xs:minLength value="5"/>
