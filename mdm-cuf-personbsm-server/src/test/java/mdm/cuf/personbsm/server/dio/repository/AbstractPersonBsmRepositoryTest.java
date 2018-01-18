@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import mdm.cuf.core.server.persist.AbstractRepositoryTest;
+import mdm.cuf.core.server.persist.AbstractJpaRepositoryTest;
 import mdm.cuf.core.server.persist.Entity;
 
 /**
@@ -15,7 +15,7 @@ import mdm.cuf.core.server.persist.Entity;
  * @param <ID>
  */
 public abstract class AbstractPersonBsmRepositoryTest<T extends Entity<ID>, ID extends Serializable>
-        extends AbstractRepositoryTest<T, ID> {
+        extends AbstractJpaRepositoryTest<T, ID> {
 
     @Autowired
     protected PersonBsmJobRepository personBsmJobRepository;
