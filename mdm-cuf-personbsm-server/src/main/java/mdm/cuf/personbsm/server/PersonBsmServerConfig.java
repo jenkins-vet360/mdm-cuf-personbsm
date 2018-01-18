@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -25,7 +26,10 @@ import mdm.cuf.personbsm.server.rest.provider.PersonBsmServerRestProviderConfig;
  */
 
 @Configuration
-@ComponentScan(basePackages = "mdm.cuf.personbsm.server", excludeFilters = @Filter(Configuration.class))
+@ComponentScan(basePackages = {"mdm.cuf.personbsm.server", "mdm.cuf.core.server.persist"}, 
+    excludeFilters = {@Filter(Configuration.class),
+            //gotta explicitly exclude DIO sub package because it's bundled in the mega core-server jar at this time
+            @Filter(type=FilterType.REGEX,pattern="mdm\\.cuf\\.core\\.server\\.persist\\.dio\\..*")})
 @Import({MdmCufCoreServerConfig.class,PersonBsmServerRestProviderConfig.class})
 public class PersonBsmServerConfig {
 
