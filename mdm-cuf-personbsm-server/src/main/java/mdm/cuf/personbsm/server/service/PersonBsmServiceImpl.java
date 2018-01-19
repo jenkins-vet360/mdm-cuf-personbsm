@@ -19,6 +19,7 @@ import mdm.cuf.core.util.Defense;
 import mdm.cuf.personbsm.api.PersonBsmErrorRequest;
 import mdm.cuf.personbsm.api.PersonBsmErrorResponse;
 import mdm.cuf.personbsm.server.entity.PersonBsmJob;
+import mdm.cuf.personbsm.server.entity.PersonBsmJobStatus;
 import mdm.cuf.personbsm.server.entity.PersonBsmTask;
 import mdm.cuf.personbsm.server.entity.PersonBsmTaskId;
 import mdm.cuf.personbsm.server.entity.repository.PersonBsmJobRepository;
@@ -105,11 +106,12 @@ public class PersonBsmServiceImpl implements PersonBsmService {
      * @throws JsonProcessingException
      */
     private PersonBsmJob requestToPersonJobEntity(final PersonBsmErrorRequest bio) throws JsonProcessingException {
-        PersonBsmJob dio = new PersonBsmJob();
-        dio.setOrigTxRequest(objectMapper.writeValueAsString(bio));
-        dio.setOrigTxAuditId(bio.getTxAuditId());
-        dio.setOrigTxSrcSys(bio.getPreValidationPersonBio().getOriginatingSourceSystem());
-        return dio;
+        PersonBsmJob entity = new PersonBsmJob();
+        entity.setOrigTxRequest(objectMapper.writeValueAsString(bio));
+        entity.setOrigTxAuditId(bio.getTxAuditId());
+        entity.setOrigTxSrcSys(bio.getPreValidationPersonBio().getOriginatingSourceSystem());
+        entity.setStatus(PersonBsmJobStatus.IN_PROGRESS);
+        return entity;
     }
 
     /**

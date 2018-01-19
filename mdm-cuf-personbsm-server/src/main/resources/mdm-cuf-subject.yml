@@ -21,7 +21,10 @@ info.mdm-cuf-personbsm-server:
     artifact: "@project.artifactId@"
     name: "@project.name@"
     description: "@project.description@"
-
+    
+# note that a /logs folder off root may be required to exist on your local to run under tomcat
+logging:
+  file: logs/mdm-cuf-personbsm-server/mdm-cuf-personbsm.log
 mdm-cuf: 
   instance-system-name: PERSONBSM
 
@@ -31,7 +34,12 @@ server.port: 8084
 
 
 mdm-cuf-personbsm:
-    demo-property-one: thisIsAnExampleProperty      
+    demo-property-one: thisIsAnExampleProperty   
+    
+# Have the application update the database schema to the current version on startup
+liquibase:
+  changeLog: classpath:/cuf-personbsm-database/mdm.cuf.personbsm-master-changelog.xml
+  enabled: true
 ---
 #---------------------------------------------------------------------------------------------------------------------
 # ENV-LOCAL-DEV PROFILE
@@ -40,7 +48,19 @@ mdm-cuf-personbsm:
 #---------------------------------------------------------------------------------------------------------------------
 spring:
   profiles: ENV-LOCAL-DEV
+  jpa.hibernate.ddl-auto: none
   
+---
+########################################################################################################################
+# ENV-UNIT-TEST PROFILE
+# the default profile, uses mocks for various external touch points such as the database, bypasses queue integration
+# standard config likely reusable as-is, thus included in core-server
+########################################################################################################################
+spring:
+  profiles: ENV-UNIT-TEST
+
+#unit tests use jps create-drop vs. liquibase at this time
+liquibase.enabled: false
 ---
 #---------------------------------------------------------------------------------------------------------------------
 # ENV-CI-DEV PROFILE

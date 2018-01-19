@@ -21,9 +21,7 @@
 			<column name="MAINTENANCE_REQUEST" type="CLOB">
 			</column>
 
-			<column name="MAINTENANCE_TX_AUDIT_ID" type="VARCHAR2(255 CHAR)">
-				<constraints nullable="false" />
-			</column>
+			<column name="MAINTENANCE_TX_AUDIT_ID" type="VARCHAR2(255 CHAR)"/>
 
 			<column name="STATUS" type="VARCHAR2(25 CHAR)">
 				<constraints nullable="false" />

@@ -38,7 +38,12 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>mdm-cuf-personbsm-api</artifactId>
         </dependency>
-
+        
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>mdm-cuf-personbsm-db</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<!-- spring boot dependencies -->
 		<dependency>
