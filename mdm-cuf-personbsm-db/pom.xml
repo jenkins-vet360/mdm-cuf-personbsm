@@ -6,7 +6,7 @@
 		<groupId>mdm.cuf.personbsm</groupId>
 		<artifactId>mdm-cuf-personbsm-parentpom</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>./mdm-cuf-personbsm-parentpom</relativePath>
+		<relativePath>../mdm-cuf-personbsm-parentpom</relativePath>
 	</parent>
 	
 	<artifactId>mdm-cuf-personbsm-db</artifactId>
