@@ -9,10 +9,31 @@
 #-Removed CUFError code #
 #################################################
 
-Feature: This feature file describes the piece of custon code that is called by the CUF to receive updates from the 
-contact maintenance endpoint. this is where the update will be seperated, stores or translated and sent to the BSM for tending
+
+Feature: This feature file describes the piece of custom  code that is called by the CUF to receive updates from the 
+ person BSM error submit this is where the update will be seperated then stored or translated and sent to the BSM for tending
+
+##########################
+# Happy Path
+# The person error handler receives a Person Update from the CUF
+# This Person Update will receive a unique transaction ID
+# This Update contains at least one error
+# This person will contain a collection of address, email and phone objects
+# The handler will sort out the errors based on the object, then by the index
+# objects with no errors will be sent to the Pending
+# objects with errors will be sent to the service_to_BSM piece
 
 
+Scenario:  Accepting a person BIO from the contact maintenance endpoint
+Given a person BIO is sent from the CUF to the Person BSM service
+ And this BIO has at least one error in the messages
+ And there is less than 2 email objects
+ And there is less than 3 address objects
+ And there is less than 6 phone objects
+ Then the service will receive this request
+ 
+ 
+ 
 
 Scenario Outline: Splitting and Storing BIOS
 Given An update containing "<biosEntering>" comes into the BSM
