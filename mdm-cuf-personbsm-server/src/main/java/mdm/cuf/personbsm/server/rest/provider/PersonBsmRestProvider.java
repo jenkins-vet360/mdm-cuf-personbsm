@@ -36,7 +36,7 @@ import mdm.cuf.personbsm.server.service.PersonBsmService;
 public class PersonBsmRestProvider extends AbstractRestProvider {
     
     @Autowired
-    private PersonBsmService processor;
+    private PersonBsmService personBsmService;
 
     /** The version of this rest endpoint */
     protected static final String VERSION = "1";
@@ -65,7 +65,7 @@ public class PersonBsmRestProvider extends AbstractRestProvider {
     @ApiResponses(value = { @ApiResponse(code = 200, message = SwaggerCommon.MESSAGE_200) })
     @MsgKeyGen( keyInterfaces={PersonBsmMessageKeys.class})
     public ResponseEntity<PersonBsmErrorResponse> personBsmErrorSubmit(@RequestBody PersonBsmErrorRequest request) {
-        return new ResponseEntity<>(processor.personBsmErrorSubmit(request), HttpStatus.OK);
+        return new ResponseEntity<>(personBsmService.personBsmErrorSubmit(request), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE,

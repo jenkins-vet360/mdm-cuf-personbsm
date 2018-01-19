@@ -1,4 +1,4 @@
-package mdm.cuf.personbsm.server.processor.validator;
+package mdm.cuf.personbsm.server.validator;
 
 import java.util.ArrayList;
 import java.util.List;
