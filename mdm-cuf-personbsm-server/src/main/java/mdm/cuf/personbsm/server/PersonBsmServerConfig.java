@@ -37,7 +37,7 @@ public class PersonBsmServerConfig {
     public UserDetailsService userDetailsService() {
         return new UserDetailsService(){
             @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+            public UserDetails loadUserByUsername(String username) {
                 //implement more advanced user details creation if you want, including a customized User object
                 //and some utility to populate roles.  that is...if required within your system.
                 final List<GrantedAuthority> authorities = new ArrayList<>();

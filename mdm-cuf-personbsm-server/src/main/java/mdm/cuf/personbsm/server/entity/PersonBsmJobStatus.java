@@ -2,7 +2,7 @@ package mdm.cuf.personbsm.server.entity;
 
 public enum PersonBsmJobStatus {
 
-    PROGESSS,
+    IN_PROGRESS,
 
     COMPLETED;
 

@@ -24,7 +24,7 @@ public class PersonBsmServerApplication extends SpringBootServletInitializer {
         return application.sources(PersonBsmServerApplication.class);
     }
 
-    public static void main(final String[] args) throws Exception {
+    public static void main(final String[] args) {
         new SpringApplicationBuilder(PersonBsmServerApplication.class).build().run(args);
     }
 }

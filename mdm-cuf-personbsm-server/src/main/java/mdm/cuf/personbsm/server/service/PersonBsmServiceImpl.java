@@ -118,11 +118,11 @@ public class PersonBsmServiceImpl implements PersonBsmService {
      * @return
      */
     private PersonBsmTask requestToPersonBsmTaskEntity(final AbstractBio bio) {
-        PersonBsmTask dio = new PersonBsmTask();
-        PersonBsmTaskId dioId = new PersonBsmTaskId();
-        dioId.setTxAuditId(bio.getTxAuditId());
-        dio.setBsmTaskId(dioId);
-        return dio;
+        PersonBsmTask entity = new PersonBsmTask();
+        PersonBsmTaskId entityId = new PersonBsmTaskId();
+        entityId.setTxAuditId(bio.getTxAuditId());
+        entity.setBsmTaskId(entityId);
+        return entity;
     }
 
 
