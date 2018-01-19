@@ -7,7 +7,7 @@
 
 
 
-Feature: The operations that are going to take place as an exception leaves the queue
+Feature: The operations that are going to take place as an exception leaves the queue.  The BSM will call a REST endpoint to 
 Scenario Outline: Reconstitute a BIO
 Given A BIO exception record is resolved
 And There are no other BIOs associated with that transaction
@@ -21,12 +21,11 @@ Then Those BIOs will be stitched together
 And "<exitTheQueue>" will be true
 And The BIOs will be sent to the CUF through the Contact Info Maintenence Point in one transaction
 Examples:
-| biosEntering          | biosWithErrors        | biosStored      | biosResolved            | exitTheQueue |
-| email, phone, address | email, phone, address | null            |  email, phone, address  | true |
-| email, address        | email, address        | null            |  email                  | false |
-| phone, address        | phone                 | address         | phone                   |true |
-| email                 | email                 | null            | null                   | false |
-
+| biosEntering          | biosWithErrors        | biosStored      | biosResolved            | exitTheQueue  | storedInDB  |
+| email, phone, address | email, phone, address | null            |  email, phone, address  | true          | false       |
+| email, address        | email, address        | null            |  email                  | false         |  true       |
+| phone, address        | phone                 | address         |  phone                  | true          | false     |
+| email                 | email                 | null            |  null                   | false         |  false     |
 
 
 
