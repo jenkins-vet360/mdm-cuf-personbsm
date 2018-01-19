@@ -16,7 +16,9 @@ public class PersonBsmMessageKeys extends CufCommonMessageKeys {
 
     public static final String TX_AUDIT_ID_NULL_KEY = "txAuditId.NotNull";
 
-    public static final String PERSON_IDENTITY_NULL_KEY = "personIdentityBio.NotNull";
+    public static final String PERSON_TRAITS_NULL_KEY = "personTraitsBio.NotNull";
+    
+    public static final String CALL_BACK_URI_NULL_KEY = "callBackUri.NotNull";
 
 
     protected PersonBsmMessageKeys() {

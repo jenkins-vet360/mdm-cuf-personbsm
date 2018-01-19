@@ -47,8 +47,11 @@ public class PersonBsmValidator {
         if (bio.getPreValidationPersonBio() == null) {
             messages.add(constructBaseMessage(PersonBsmMessageKeys.PERSON_BIO_NULL_KEY));
         }
-        if (bio.getPersonIdentityBio() == null) {
-            messages.add(constructBaseMessage(PersonBsmMessageKeys.PERSON_IDENTITY_NULL_KEY));
+        if (bio.getPersonTraits() == null) {
+            messages.add(constructBaseMessage(PersonBsmMessageKeys.PERSON_TRAITS_NULL_KEY));
+        }
+        if (Strings.isNullOrEmpty(bio.getCallbackUri())) {
+            messages.add(constructBaseMessage(PersonBsmMessageKeys.CALL_BACK_URI_NULL_KEY));
         }
         return messages;
     }

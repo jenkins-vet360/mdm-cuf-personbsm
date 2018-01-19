@@ -35,6 +35,13 @@
                         </xs:appinfo>
                     </xs:annotation>
                 </xs:element>
+                <xs:element name="callbackUri" type="xs:string" minOccurs="1">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <annox:annotate  target="field"><s:ApiModelProperty required="true" value="This is the callback uri that person bsm will send corrected PersonBio back to for this request."/></annox:annotate>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
                 <xs:element name="preValidationPersonBio" type="personBio" minOccurs="1">
                     <xs:annotation>
                         <xs:appinfo>
@@ -49,7 +56,7 @@
                         </xs:appinfo>
                     </xs:annotation>
                 </xs:element> 
-                <xs:element name="personIdentityBio" type="personIdentityBio" minOccurs="1">
+                <xs:element name="personTraits" type="PersonTraits" minOccurs="1">
                     <xs:annotation>
                         <xs:appinfo>
                             <annox:annotate  target="field"><s:ApiModelProperty required="true" value="This is the person identity bio containing other identity elements."/></annox:annotate>
@@ -500,7 +507,7 @@
         </xs:sequence>
 	</xs:complexType>
    
-    <xs:complexType name="personIdentityBio">
+    <xs:complexType name="PersonTraits">
     	<xs:complexContent>
             <xs:extension base="abstractBio">
                 <xs:sequence>
