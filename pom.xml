@@ -15,7 +15,8 @@
 	
 	<modules>
 		<module>mdm-cuf-personbsm-parentpom</module>
-        <module>mdm-cuf-personbsm-api-validators</module>
+		<module>mdm-cuf-personbsm-db</module>
+		<module>mdm-cuf-personbsm-api-validators</module>
         <module>mdm-cuf-personbsm-api</module>
 		<module>mdm-cuf-personbsm-server</module>
 	</modules>
