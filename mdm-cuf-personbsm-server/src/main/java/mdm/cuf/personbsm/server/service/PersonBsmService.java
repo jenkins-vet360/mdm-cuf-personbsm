@@ -6,6 +6,6 @@ import mdm.cuf.personbsm.api.PersonBsmErrorResponse;
 @FunctionalInterface
 public interface PersonBsmService {
 
-    public PersonBsmErrorResponse personBsmErrorSubmit(PersonBsmErrorRequest request);
+    PersonBsmErrorResponse personBsmErrorSubmit(PersonBsmErrorRequest request);
 
 }

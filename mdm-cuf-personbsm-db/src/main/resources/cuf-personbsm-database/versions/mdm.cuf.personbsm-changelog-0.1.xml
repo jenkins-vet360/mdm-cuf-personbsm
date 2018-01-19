@@ -7,8 +7,7 @@
 		<createTable tableName="BSM_JOB">
 
 			<column name="ORIG_TX_REQUEST_ID" type="VARCHAR2(255 CHAR)">
-				<constraints nullable="false" primaryKey="true"
-					primaryKeyName="ORIG_TX_REQUEST_ID_PERM_PK" />
+				<constraints nullable="false" primaryKey="true" primaryKeyName="ORIG_TX_REQUEST_ID_PERM_PK" />
 			</column>
 
 			<column name="ORIG_TX_REQUEST" type="CLOB">
@@ -66,8 +65,7 @@
 
 		</createTable>
 
-		<addPrimaryKey columnNames="TX_AUDIT_ID,BIO_INDEX,BIO_TYPE"
-			constraintName="BSM_TASK_PK" tableName="BSM_TASK" />
+		<addPrimaryKey columnNames="TX_AUDIT_ID,BIO_INDEX,BIO_TYPE" constraintName="BSM_TASK_PK" tableName="BSM_TASK" />
 
 	</changeSet>
 </databaseChangeLog>

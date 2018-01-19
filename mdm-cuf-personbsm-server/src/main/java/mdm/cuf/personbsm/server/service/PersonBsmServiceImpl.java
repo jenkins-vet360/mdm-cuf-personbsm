@@ -64,7 +64,7 @@ public class PersonBsmServiceImpl implements PersonBsmService {
             return response;
         }
 
-        PersonBsmJob personJobBsm = null;
+        PersonBsmJob personJobBsm;
         try {
             personJobBsm = requestToPersonJobEntity(request);
         } catch (JsonProcessingException e) {
