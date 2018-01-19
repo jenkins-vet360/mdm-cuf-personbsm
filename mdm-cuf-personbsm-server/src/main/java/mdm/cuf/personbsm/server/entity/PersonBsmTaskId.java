@@ -1,4 +1,4 @@
-package mdm.cuf.personbsm.server.dio;
+package mdm.cuf.personbsm.server.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

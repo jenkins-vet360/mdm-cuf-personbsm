@@ -62,7 +62,7 @@ public class PersonBsmValidator {
     private Message constructBaseMessage(String key) {
         Message msg = new Message();
         msg.setPotentiallySelfCorrectingOnRetry(false);
-        msg.setSeverity(MessageSeverity.FATAL);
+        msg.setSeverity(MessageSeverity.ERROR);
         msg.setKey(key);
         return MessageUtils.constructReturnMessage(msg, messageSource);
     }

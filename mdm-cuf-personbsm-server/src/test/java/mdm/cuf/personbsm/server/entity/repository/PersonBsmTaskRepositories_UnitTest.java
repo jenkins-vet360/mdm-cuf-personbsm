@@ -1,4 +1,4 @@
-package mdm.cuf.personbsm.server.dio.repository;
+package mdm.cuf.personbsm.server.entity.repository;
 
 import java.util.UUID;
 
@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import mdm.cuf.core.server.persist.EntityRepository;
 import mdm.cuf.core.server.persist.EntityRepositoryTestHelper;
-import mdm.cuf.personbsm.server.dio.PersonBsmTask;
-import mdm.cuf.personbsm.server.dio.PersonBsmTaskId;
+import mdm.cuf.personbsm.server.entity.PersonBsmTask;
+import mdm.cuf.personbsm.server.entity.PersonBsmTaskId;
 
 public class PersonBsmTaskRepositories_UnitTest extends AbstractPersonBsmRepositoryTest {
 

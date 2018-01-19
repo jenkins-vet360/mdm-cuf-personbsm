@@ -1,4 +1,4 @@
-package mdm.cuf.personbsm.server.dio;
+package mdm.cuf.personbsm.server.entity;
 
 public enum PersonBsmJobStatus {
 

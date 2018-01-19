@@ -1,4 +1,4 @@
-package mdm.cuf.personbsm.server.dio.repository;
+package mdm.cuf.personbsm.server.entity.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
