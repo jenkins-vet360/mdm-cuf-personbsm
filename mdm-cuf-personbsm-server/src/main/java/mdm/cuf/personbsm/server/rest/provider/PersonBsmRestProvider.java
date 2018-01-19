@@ -1,6 +1,5 @@
 package mdm.cuf.personbsm.server.rest.provider;
 
-import mdm.cuf.personbsm.api.PersonBsmCorrectedBioRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,12 +13,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import mdm.cuf.core.api.CufCommonMessageKeys;
 import mdm.cuf.core.messages.Message;
 import mdm.cuf.core.messages.MessageSeverity;
 import mdm.cuf.core.server.rest.provider.AbstractRestProvider;
 import mdm.cuf.core.server.rest.provider.MsgKeyGen;
 import mdm.cuf.core.server.rest.provider.SwaggerCommon;
+import mdm.cuf.personbsm.api.PersonBsmCorrectedBioRequest;
 import mdm.cuf.personbsm.api.PersonBsmErrorRequest;
 import mdm.cuf.personbsm.api.PersonBsmErrorResponse;
 import mdm.cuf.personbsm.server.PersonBsmServerProperties;

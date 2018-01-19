@@ -3,6 +3,7 @@ package mdm.cuf.personbsm.server;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import mdm.cuf.core.server.MdmCufCoreServerProperties;
 
@@ -17,9 +18,17 @@ public class PersonBsmServerConfig_UnitTest extends PersonBsmServerSpringTestBas
 	@Autowired
 	private MdmCufCoreServerProperties properties;
 	
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
 	@Test
 	public void contextLoads() {
 		Assert.assertNotNull(properties);
 	}
+	
+	@Test
+    public void userServiceUnitTest() {
+        Assert.assertNotNull(userDetailsService.loadUserByUsername("sample"));
+    }
 
 }
