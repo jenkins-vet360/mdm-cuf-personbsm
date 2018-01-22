@@ -91,11 +91,11 @@ Examples:
        And the system will send the following mapped fields to the BSM
        
       | fieldsFrom1306                      | bsmFields            | 
-      | "FirstName" "MiddleName" "LastName" | mviFullName          | 
-      | Mothers Maiden Name (MMN)           | mviMothersMaidenName | 
-      | Gender                              | mviGender            | 
-      | Phone Number                        | mviPhone             | 
-      | Date of Birth (DOB)                 | mviDOB               | 
+      | "FirstName" "MiddleName" "LastName" | mvi_FullName          | 
+      | Mothers Maiden Name (MMN)           | mvi_MothersMaidenName | 
+      | Gender                              | mvi_Gender            | 
+      | Phone Number                        | mvi_Phone             | 
+      | Date of Birth (DOB)                 | mvi_DOB               | 
       
       
   # Provide concatinations
