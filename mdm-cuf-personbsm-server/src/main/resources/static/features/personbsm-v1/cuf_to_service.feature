@@ -20,7 +20,7 @@ Feature: This feature file describes the piece of custom  code that is called by
 # This Update contains at least one error
 # This person will contain a collection of address, email and phone objects
 # The handler will sort out the errors based on the object, then by the index
-# objects with no errors will be sent to the Pending
+# objects with no errors will be sent to the Pending Updates Database
 # objects with errors will be sent to the service_to_BSM piece
 ##############################################################################
 
@@ -52,11 +52,11 @@ And "<biosStored>" will be held in a temporary cache
 And "<callToBSM1>" , "<callToBSM2>", and "<callToBSM3>" are sent to the BSM
 
 Examples:
-| biosEntering          | biosWithErrors        | biosStored      | callToBSM1 | callToBSM2 | callToBSM3 |
-| email, phone, address | email, phone, address |                 | email      | phone      | address    |
-| email, address        | email                 | address         | email      |            |            |
-| phone, address        | phone, address        |                 | phone      | address    |            |
-| email                 | email                 |                 | email      |            |            |
+      | biosEntering          | biosWithErrors        | biosStored | callToBSMphone | callToBSM2email | callToBSM3address | 
+      | email, phone, address | email, phone, address |            | true           | true            | true              | 
+      | email, address        | email                 | address    | false          | false           | true              | 
+      | phone, address, email | phone, address        |            | true           | false           | true              | 
+      | email                 | email                 |            | false          | true            | false             | 
 
 
  Scenario:
@@ -88,7 +88,7 @@ Examples:
       | 987 65 4321 | 4321        | 
       | null        | null        | 
  
-       And the system will send the following mapped fields to the BSM
+       And the system willreceive the following mapped fields to send to the BSM
        
       | fieldsFrom1306                      | bsmFields            | 
       | "FirstName" "MiddleName" "LastName" | mvi_FullName          | 
