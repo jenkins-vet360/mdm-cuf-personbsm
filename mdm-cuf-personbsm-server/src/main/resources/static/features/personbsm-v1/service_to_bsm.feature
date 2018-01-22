@@ -8,6 +8,16 @@
 # The service makes a field for additional exception hints
 # The service calls the BSM 
 
+# Assumption:
+# There is always a orignatingSourceSystem
+# There is always a person in MVI for each exceptions
+
+# Add how many errors are accepted
+
+# Add indecies to exceptions in the scenario
+# Add MVI errors
+# No data type errors
+
 Scenario Outline: Hints in other exceptions
     Given An update containing "<biosEntering>" comes into the BSM
       And The update has more than one BIO
