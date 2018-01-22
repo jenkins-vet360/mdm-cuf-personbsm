@@ -27,7 +27,7 @@
 				<constraints nullable="false" />
 			</column>
 			
-			<column name="CALLBACK_URI" type="VARCHAR2(255 CHAR)">
+			<column name="CALLBACK_URI" type="VARCHAR2(2083 CHAR)">
 				<constraints nullable="false" />
 			</column>
 
@@ -57,7 +57,7 @@
 
 			<column name="BSM_APPROVED" type="CLOB" />
 
-			<column name="RECORD_STS" type="VARCHAR2(10 CHAR)" />
+			<column name="RECORD_STS" type="VARCHAR2(25 CHAR)" />
 
 			<column name="OVERRIDE" type="BOOLEAN" />
 

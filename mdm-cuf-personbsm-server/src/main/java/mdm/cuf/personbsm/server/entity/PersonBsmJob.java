@@ -102,7 +102,7 @@ public class PersonBsmJob extends AbstractAuditedEntity<String> {
         this.status = status;
     }
 
-    @Column(name = "CALLBACK_URI", nullable = false , length = 255)
+    @Column(name = "CALLBACK_URI", nullable = false , length = 2083)
     public String getCallbackUri() {
         return callbackUri;
     }

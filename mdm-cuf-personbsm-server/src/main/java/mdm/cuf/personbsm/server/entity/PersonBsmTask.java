@@ -72,7 +72,7 @@ public class PersonBsmTask extends AbstractAuditedEntity<PersonBsmTaskId> {
         this.bsmApproved = bsmApproved;
     }
 
-    @Column(name = "RECORD_STS", length = 10)
+    @Column(name = "RECORD_STS", length = 25)
     public String getRecordSts() {
         return recordSts;
     }
