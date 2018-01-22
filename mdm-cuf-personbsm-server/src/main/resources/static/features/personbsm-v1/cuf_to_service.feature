@@ -13,6 +13,10 @@
 Feature: This feature file describes the piece of custom  code that is called by the CUF to receive updates from the 
  person BSM error submit this is where the update will be seperated then stored or translated and sent to the BSM for tending
 
+#Assumption: WE are receiving a person object it is of the same 
+
+
+
 ##############################################################################
 # Happy Path
 # The person error handler receives a Person Update from the CUF
@@ -90,12 +94,13 @@ Examples:
  
        And the system willreceive the following mapped fields to send to the BSM
        
-      | fieldsFrom1306                      | bsmFields            | 
+      | fieldsFrom1306                      | bsmFields             | 
       | "FirstName" "MiddleName" "LastName" | mvi_FullName          | 
       | Mothers Maiden Name (MMN)           | mvi_MothersMaidenName | 
       | Gender                              | mvi_Gender            | 
       | Phone Number                        | mvi_Phone             | 
       | Date of Birth (DOB)                 | mvi_DOB               | 
+      | SSN                                 | mvi_SSN               | 
       
       
   # Provide concatinations
