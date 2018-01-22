@@ -17,7 +17,7 @@ Feature: the request and response objects for the BSM will be identical, this fe
       | potentiallySelfCorrectingOnRetry | boolean | 
       | severity                         | string  | 
 
-    Given a valid personIdentityBIO:
+    Given a valid personTraits:
       | attributeName           | type     | 
       | correlationTimeMillis   | datetime | 
       | createDate              | datetime | 
