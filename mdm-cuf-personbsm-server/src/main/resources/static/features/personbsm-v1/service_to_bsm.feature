@@ -24,3 +24,8 @@ Scenario Outline: Hints in other exceptions
       | 125  | phone, address        | phone, address        | null                  | Address               | Phone                   | 
       | 126  | email, address        | email, address        | Address               |                       | Email                   | 
       | 127  | email                 | email                 | null                  | null                  | null                    |
+
+
+email WADL: http://spectrum.vet360.halfakerlabs.com:8080/rest/email_bsm_service?_wadl
+phone WADL: http://spectrum.vet360.halfakerlabs.com:8080/rest/phone_bsm_service?_wadl
+address WADL: http://spectrum.vet360.halfakerlabs.com:8080/rest/address_bsm_service?_wadl
