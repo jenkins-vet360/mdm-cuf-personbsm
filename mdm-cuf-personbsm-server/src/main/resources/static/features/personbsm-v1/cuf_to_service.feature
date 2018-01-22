@@ -20,7 +20,7 @@ Feature: This feature file describes the piece of custom  code that is called by
 ##############################################################################
 # Happy Path
 # The person error handler receives a Person Update from the CUF
-# This Person Update will receive a unique transaction ID
+# This Person Update will have a unique transaction ID
 # This Update contains at least one error
 # This person will contain a collection of address, email and phone objects
 # The handler will sort out the errors based on the object, then by the index
@@ -56,13 +56,13 @@ And "<biosStored>" will be held in a temporary cache
 And "<callToBSM1>" , "<callToBSM2>", and "<callToBSM3>" are sent to the BSM
 
 Examples:
-      | biosEntering          | biosWithErrors        | biosStored | callToBSMphone | callToBSM2email | callToBSM3address | 
+      | biosEntering          | biosWithErrors        | biosStored | callToBSMphone | callToBSMemail  | callToBSMaddress  | 
       | email, phone, address | email, phone, address |            | true           | true            | true              | 
       | email, address        | email                 | address    | false          | false           | true              | 
       | phone, address, email | phone, address        |            | true           | false           | true              | 
       | email                 | email                 |            | false          | true            | false             | 
 
-
+#This call is made by the contact info hub
  Scenario:
     Given an address with a valid person is sent to the exception queue
       And the person exists in MVI
@@ -92,7 +92,7 @@ Examples:
       | 987 65 4321 | 4321        | 
       | null        | null        | 
  
-       And the system willreceive the following mapped fields to send to the BSM
+       And the system willreceive the following mapped fields to send to the BSM as a Person Identity Object
        
       | fieldsFrom1306                      | bsmFields             | 
       | "FirstName" "MiddleName" "LastName" | mvi_FullName          | 
@@ -100,10 +100,9 @@ Examples:
       | Gender                              | mvi_Gender            | 
       | Phone Number                        | mvi_Phone             | 
       | Date of Birth (DOB)                 | mvi_DOB               | 
-      | SSN                                 | mvi_SSN               | 
+      | SSN                                 | mvi_SSNLast4          | 
       
-      
-  # Provide concatinations
+
   
   
 
