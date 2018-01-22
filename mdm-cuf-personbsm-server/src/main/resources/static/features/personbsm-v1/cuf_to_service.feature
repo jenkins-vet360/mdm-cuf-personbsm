@@ -38,10 +38,10 @@ Given a person BIO is sent from the CUF to the Person BSM service
   And it has a null personsTraits object
   Then the sytem will reject the request and return the code "BSM400" 
   Examples:
- | LastName  | FirstName  |  MiddleName  | 	Mothers Maiden Name (MMN)  | Gender   | SSN  | Address Line1   | Address Line2  | Address Line3   | Address City  | Address State  | Phone Number | Date of Birth (DOB)  | 
-|||||||||||||||
-  
- 
+      | LastName | FirstName | MiddleName | Mothers Maiden Name (MMN) | Gender | SSN | Address Line1 | Address Line2 | Address Line3 | Address City | Address State | Phone Number | Date of Birth (DOB) | responseCodes  |
+      |          |           |            |                           |        |     |               |               |               |              |               |              |                     |   BSM400       |
+      |  Smith   | Joe       | James      | Browns                    | M      |     | 123 Main st   |               |               |  Town        |    VA         |              |                     |   BSM200       |  
+      |  Doe     | Jane      |  NMN       |                           | F      |     |               |               |               |              |               |              |                     |                | 
 
 Scenario Outline: Splitting and Storing BIOS
 Given An update containing "<biosEntering>" comes into the BSM
