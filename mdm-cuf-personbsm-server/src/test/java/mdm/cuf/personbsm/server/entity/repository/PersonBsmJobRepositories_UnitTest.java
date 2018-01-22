@@ -32,6 +32,7 @@ public class PersonBsmJobRepositories_UnitTest extends AbstractPersonBsmReposito
         entity.setOrigTxSrcSys("VETSGOV");
         entity.setOrigTxAuditId(UUID.randomUUID().toString());
         entity.setStatus(PersonBsmJobStatus.IN_PROGRESS);
+        entity.setCallbackUri("http://sample.com");
         return entity;
     }
 

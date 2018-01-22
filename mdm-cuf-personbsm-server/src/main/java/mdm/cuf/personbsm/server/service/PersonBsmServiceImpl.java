@@ -111,6 +111,7 @@ public class PersonBsmServiceImpl implements PersonBsmService {
         entity.setOrigTxAuditId(bio.getTxAuditId());
         entity.setOrigTxSrcSys(bio.getPreValidationPersonBio().getOriginatingSourceSystem());
         entity.setStatus(PersonBsmJobStatus.IN_PROGRESS);
+        entity.setCallbackUri(bio.getCallbackUri());
         return entity;
     }
 

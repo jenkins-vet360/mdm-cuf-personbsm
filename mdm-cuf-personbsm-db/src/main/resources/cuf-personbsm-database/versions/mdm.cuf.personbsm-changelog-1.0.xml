@@ -26,6 +26,10 @@
 			<column name="STATUS" type="VARCHAR2(25 CHAR)">
 				<constraints nullable="false" />
 			</column>
+			
+			<column name="CALLBACK_URI" type="VARCHAR2(255 CHAR)">
+				<constraints nullable="false" />
+			</column>
 
 			<column name="CREATED_DATE" type="DATE" />
 

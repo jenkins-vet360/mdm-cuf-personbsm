@@ -33,6 +33,8 @@ public class PersonBsmJob extends AbstractAuditedEntity<String> {
     private String maintenanceTxAuditId;
 
     private PersonBsmJobStatus status;
+    
+    private String callbackUri;
 
     @Override
     @Transient
@@ -98,6 +100,15 @@ public class PersonBsmJob extends AbstractAuditedEntity<String> {
 
     public void setStatus(PersonBsmJobStatus status) {
         this.status = status;
+    }
+
+    @Column(name = "CALLBACK_URI", nullable = false , length = 255)
+    public String getCallbackUri() {
+        return callbackUri;
+    }
+
+    public void setCallbackUri(String callbackUri) {
+        this.callbackUri = callbackUri;
     }
 
 }
