@@ -7,6 +7,7 @@ import org.junit.Test;
 import mdm.cuf.core.server.persist.EntityRepository;
 import mdm.cuf.core.server.persist.EntityRepositoryTestHelper;
 import mdm.cuf.personbsm.server.entity.PersonBsmJob;
+import mdm.cuf.personbsm.server.entity.PersonBsmJobStatus;
 
 public class PersonBsmJobRepositories_UnitTest extends AbstractPersonBsmRepositoryTest {
     
@@ -30,6 +31,7 @@ public class PersonBsmJobRepositories_UnitTest extends AbstractPersonBsmReposito
         entity.setOrigTxRequest("Sample Request");
         entity.setOrigTxSrcSys("VETSGOV");
         entity.setOrigTxAuditId(UUID.randomUUID().toString());
+        entity.setStatus(PersonBsmJobStatus.IN_PROGRESS);
         return entity;
     }
 

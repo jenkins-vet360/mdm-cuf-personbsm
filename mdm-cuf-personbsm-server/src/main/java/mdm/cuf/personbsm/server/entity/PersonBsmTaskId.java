@@ -19,7 +19,7 @@ public class PersonBsmTaskId extends AbstractTransferObject {
 
     private String bioType;
 
-    @Column(name = "TX_AUDIT_ID", nullable = false, updatable = false)
+    @Column(name = "TX_AUDIT_ID", nullable = false, updatable = false , length = 36)
     public String getTxAuditId() {
         return txAuditId;
     }
@@ -28,7 +28,7 @@ public class PersonBsmTaskId extends AbstractTransferObject {
         this.txAuditId = txAuditId;
     }
 
-    @Column(name = "BIO_INDEX")
+    @Column(name = "BIO_INDEX", nullable = false)
     public Integer getBioIndex() {
         return bioIndex;
     }
@@ -37,7 +37,7 @@ public class PersonBsmTaskId extends AbstractTransferObject {
         this.bioIndex = bioIndex;
     }
 
-    @Column(name = "BIO_TYPE", length = 255)
+    @Column(name = "BIO_TYPE", nullable = false , length = 255)
     public String getBioType() {
         return bioType;
     }

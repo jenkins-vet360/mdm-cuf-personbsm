@@ -52,7 +52,7 @@ public class PersonBsmTask extends AbstractAuditedEntity<PersonBsmTaskId> {
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "MESSAGES")
+    @Column(name = "MESSAGES", nullable = false)
     public String getMessages() {
         return messages;
     }
@@ -72,7 +72,7 @@ public class PersonBsmTask extends AbstractAuditedEntity<PersonBsmTaskId> {
         this.bsmApproved = bsmApproved;
     }
 
-    @Column(name = "RECORD_STS", nullable = false, length = 10)
+    @Column(name = "RECORD_STS", length = 10)
     public String getRecordSts() {
         return recordSts;
     }

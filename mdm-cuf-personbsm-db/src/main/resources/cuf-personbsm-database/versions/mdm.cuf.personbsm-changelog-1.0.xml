@@ -2,11 +2,11 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-	<changeSet author="darias" id="0.1-PERSON_BSM">
+	<changeSet author="darias" id="1.0-PERSON_BSM">
 
 		<createTable tableName="BSM_JOB">
 
-			<column name="ORIG_TX_REQUEST_ID" type="VARCHAR2(255 CHAR)">
+			<column name="ORIG_TX_REQUEST_ID" type="VARCHAR2(36 CHAR)">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="ORIG_TX_REQUEST_ID_PERM_PK" />
 			</column>
 
@@ -21,21 +21,21 @@
 			<column name="MAINTENANCE_REQUEST" type="CLOB">
 			</column>
 
-			<column name="MAINTENANCE_TX_AUDIT_ID" type="VARCHAR2(255 CHAR)"/>
+			<column name="MAINTENANCE_TX_AUDIT_ID" type="VARCHAR2(36 CHAR)"/>
 
 			<column name="STATUS" type="VARCHAR2(25 CHAR)">
 				<constraints nullable="false" />
 			</column>
 
-			<column name="CREATED_DATE" type="TIMESTAMP(6)" />
+			<column name="CREATED_DATE" type="DATE" />
 
-			<column name="UPDATED_DATE" type="TIMESTAMP(6)" />
+			<column name="UPDATED_DATE" type="DATE" />
 
 		</createTable>
 
 		<createTable tableName="BSM_TASK">
 
-			<column name="TX_AUDIT_ID" type="VARCHAR2(255 CHAR)">
+			<column name="TX_AUDIT_ID" type="VARCHAR2(36 CHAR)">
 				<constraints nullable="false" />
 			</column>
 
@@ -57,9 +57,9 @@
 
 			<column name="OVERRIDE" type="BOOLEAN" />
 
-			<column name="CREATED_DATE" type="TIMESTAMP(6)" />
+			<column name="CREATED_DATE" type="DATE" />
 
-			<column name="UPDATED_DATE" type="TIMESTAMP(6)" />
+			<column name="UPDATED_DATE" type="DATE" />
 
 		</createTable>
 

@@ -41,7 +41,7 @@ public class PersonBsmJob extends AbstractAuditedEntity<String> {
     }
 
     @Id
-    @Column(name = "ORIG_TX_REQUEST_ID")
+    @Column(name = "ORIG_TX_REQUEST_ID", nullable = false , length = 36)
     public String getOrigTxAuditId() {
         return origTxAuditId;
     }
@@ -52,7 +52,7 @@ public class PersonBsmJob extends AbstractAuditedEntity<String> {
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "ORIG_TX_REQUEST")
+    @Column(name = "ORIG_TX_REQUEST", nullable = false )
     public String getOrigTxRequest() {
         return origTxRequest;
     }
@@ -61,7 +61,7 @@ public class PersonBsmJob extends AbstractAuditedEntity<String> {
         this.origTxRequest = origTxRequest;
     }
 
-    @Column(name = "ORIG_TX_SRC_SYS", length = 255)
+    @Column(name = "ORIG_TX_SRC_SYS", nullable = false , length = 255)
     public String getOrigTxSrcSys() {
         return origTxSrcSys;
     }
@@ -81,7 +81,7 @@ public class PersonBsmJob extends AbstractAuditedEntity<String> {
         this.maintenanceRequest = maintenanceRequest;
     }
 
-    @Column(name = "MAINTENANCE_TX_AUDIT_ID")
+    @Column(name = "MAINTENANCE_TX_AUDIT_ID", length = 36)
     public String getMaintenanceTxAuditId() {
         return maintenanceTxAuditId;
     }
@@ -91,7 +91,7 @@ public class PersonBsmJob extends AbstractAuditedEntity<String> {
     }
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "STATUS")
+    @Column(name = "STATUS", nullable = false, length = 25)
     public PersonBsmJobStatus getStatus() {
         return status;
     }
