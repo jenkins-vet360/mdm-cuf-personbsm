@@ -7,7 +7,17 @@
 
 
 
-Feature: The operations that are going to take place as an exception leaves the queue.  The BSM will call a REST endpoint to 
+Feature: The operations that are going to take place as an exception leaves the queue.  The BSM will call a REST endpoint to a 
+microservice that will rehydrate the records and prepare them to be sent back to the CUF
+
+#############################################
+# Happy Path
+# A record is sent from the exception queue to the REST endpoint as a JSON request
+# The source system values are updated to reflect the records were manipulated
+# The record is matched via a transaction ID to the record within the database of good BIOs
+# The record is sent back to the CUF
+#############################################
+
 Scenario Outline: Reconstitute a BIO
 Given A BIO exception record is resolved
 And There are no other BIOs associated with that transaction
@@ -24,8 +34,8 @@ Examples:
 | biosEntering          | biosWithErrors        | biosStored      | biosResolved            | exitTheQueue  | storedInDB  |
 | email, phone, address | email, phone, address | null            |  email, phone, address  | true          | false       |
 | email, address        | email, address        | null            |  email                  | false         |  true       |
-| phone, address        | phone                 | address         |  phone                  | true          | false     |
-| email                 | email                 | null            |  null                   | false         |  false     |
+| phone, address        | phone                 | address         |  phone                  | true          | false       |
+| email                 | email                 | null            |  null                   | false         |  false      |
 
 
 
@@ -36,10 +46,10 @@ And That BIO had been altered by a data steward
 When the BIO exits the queue 
 Then following "<change>" will be made to the "<values>" 
 Examples:
-| values                  |   change |
-| originatingSourceSystem | No Change |
-| sourceSystem            | Vet360BSM |
-| sourceDate              | time the record exits the BSM in YYYY-MM-DDTHH:MM:SSZ format |
+| values                  |   change                                                      |
+| originatingSourceSystem | No Change                                                     |
+| sourceSystem            | Vet360BSM                                                     |
+| sourceDate              | time the record exits the BSM in YYYY-MM-DDTHH:MM:SSZ format  |
 
 
 
