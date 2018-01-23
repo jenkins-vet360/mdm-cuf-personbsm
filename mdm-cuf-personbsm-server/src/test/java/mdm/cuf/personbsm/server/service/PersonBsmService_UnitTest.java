@@ -71,6 +71,7 @@ public class PersonBsmService_UnitTest extends PersonBsmServerSpringTestBase {
             tel.setSourceSystem("VETSGOV");
             tel.setSourceSystemUser("VETSGOV");
             tel.setTxAuditId(txAuditId);
+            personBio.getTelephones().add(tel);
             request.setPreValidationPersonBio(personBio);
 
             Message msg = new Message();

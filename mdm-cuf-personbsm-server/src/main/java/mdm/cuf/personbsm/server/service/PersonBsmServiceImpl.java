@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 
 import mdm.cuf.core.bio.AbstractBio;
+import mdm.cuf.core.exception.CufCoreRuntimeException;
 import mdm.cuf.core.messages.Message;
 import mdm.cuf.core.messages.MessageSeverity;
 import mdm.cuf.core.util.Defense;
@@ -28,6 +29,7 @@ import mdm.cuf.personbsm.server.entity.PersonBsmTask;
 import mdm.cuf.personbsm.server.entity.PersonBsmTaskId;
 import mdm.cuf.personbsm.server.entity.repository.PersonBsmJobRepository;
 import mdm.cuf.personbsm.server.entity.repository.PersonBsmTaskRepository;
+import mdm.cuf.personbsm.server.exception.PersonBsmErrorKeys;
 import mdm.cuf.personbsm.server.validator.PersonBsmValidator;
 
 /**
@@ -70,20 +72,7 @@ public class PersonBsmServiceImpl implements PersonBsmService {
             return response;
         }
 
-        PersonBsmJob personJobBsm;
-        try {
-            personJobBsm = requestToPersonJobEntity(request);
-        } catch (JsonProcessingException e) {
-            LOGGER.error("Error converting PersonBsmErrorRequest to JSON", e);
-            Message msg = new Message();
-            msg.setPotentiallySelfCorrectingOnRetry(false);
-            msg.setSeverity(MessageSeverity.ERROR);
-            msg.setText("Error converting PersonBsmErrorRequest to JSON");;
-            response.addMessage(msg);
-            return response;
-        }
-
-        personBsmJobRepository.save(personJobBsm);
+        personBsmJobRepository.save(requestToPersonJobEntity(request));
 
         getBioErrorTargets(request)
                 .forEach(bioDetail -> personBsmTaskRepository.save(requestToPersonBsmTaskEntity(bioDetail.getBio().getTxAuditId(),
@@ -104,7 +93,9 @@ public class PersonBsmServiceImpl implements PersonBsmService {
         List<PersonBsmTaskDetail> bioTargets = new ArrayList<>();
         Map<String, PersonBsmTaskDetail> fieldsMap = getBiosMap(request);
         for (Message msg : request.getMessages()) {
-            String keyCheck = !Strings.isNullOrEmpty(msg.getKey()) && msg.getKey().contains(".") ? msg.getKey().substring(0, msg.getKey().indexOf(".")):"";
+            String keyCheck = !Strings.isNullOrEmpty(msg.getKey()) && msg.getKey().contains(".")
+                    ? msg.getKey().substring(0, msg.getKey().indexOf("."))
+                    : "";
             if (fieldsMap.containsKey(keyCheck)) {
                 PersonBsmTaskDetail detail = fieldsMap.get(keyCheck);
                 try {
@@ -114,6 +105,10 @@ public class PersonBsmServiceImpl implements PersonBsmService {
                 }
                 bioTargets.add(detail);
             }
+        }
+        if (CollectionUtils.isEmpty(bioTargets)) {
+            LOGGER.error("Not able to find any bio targets");
+            throw new CufCoreRuntimeException(PersonBsmErrorKeys.INVALID_REQUEST);
         }
         return bioTargets;
     }
@@ -125,9 +120,14 @@ public class PersonBsmServiceImpl implements PersonBsmService {
      * @return
      * @throws JsonProcessingException
      */
-    private PersonBsmJob requestToPersonJobEntity(final PersonBsmErrorRequest bio) throws JsonProcessingException {
+    private PersonBsmJob requestToPersonJobEntity(final PersonBsmErrorRequest bio) {
         PersonBsmJob entity = new PersonBsmJob();
-        entity.setOrigTxRequest(objectMapper.writeValueAsString(bio));
+        try {
+            entity.setOrigTxRequest(objectMapper.writeValueAsString(bio));
+        } catch (JsonProcessingException e) {
+            LOGGER.error("Not able to convert Request to JSON",e);
+            throw new CufCoreRuntimeException(PersonBsmErrorKeys.PARSE_REQUEST_EXCEPTION);
+        }
         entity.setOrigTxAuditId(bio.getTxAuditId());
         entity.setOrigTxSrcSys(bio.getPreValidationPersonBio().getOriginatingSourceSystem());
         entity.setStatus(PersonBsmJobStatus.IN_PROGRESS);
@@ -162,12 +162,12 @@ public class PersonBsmServiceImpl implements PersonBsmService {
     }
 
     private void populateSubBios(List subBios, Map<String, PersonBsmTaskDetail> biosMap, String prefix) {
-        if(!CollectionUtils.isEmpty(subBios)) {
+        if (!CollectionUtils.isEmpty(subBios)) {
             for (int i = 0; i < subBios.size(); i++) {
                 biosMap.put(prefix + "[" + i + "]", createBioDetail((AbstractBio) subBios.get(i), i));
             }
         }
-       
+
     }
 
     private PersonBsmTaskDetail createBioDetail(AbstractBio bio, int index) {
