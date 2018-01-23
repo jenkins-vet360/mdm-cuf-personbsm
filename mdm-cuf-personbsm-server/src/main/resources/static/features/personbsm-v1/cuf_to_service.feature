@@ -37,15 +37,24 @@ Given a person BIO is sent from the CUF to the Person BSM service
  And the personTraits object is not null
  Then the service will receive this request and return BSM200
  
+ #Failure Scenarios
  Scenario Outline: Reject a request with a null personTraits object
   Given a validpersonBSM request is sent to the system
   And it has a null personsTraits object
   Then the sytem will reject the request and return the code "BSM400" 
+  And the request is stored in a audit table and will not be tended
   Examples:
-      | LastName | FirstName | MiddleName | Mothers Maiden Name (MMN) | Gender | SSN | Address Line1 | Address Line2 | Address Line3 | Address City | Address State | Phone Number | Date of Birth (DOB) | responseCodes  |
-      |          |           |            |                           |        |     |               |               |               |              |               |              |                     |   BSM400       |
-      |  Smith   | Joe       | James      | Browns                    | M      |     | 123 Main st   |               |               |  Town        |    VA         |              |                     |   BSM200       |  
-      |  Doe     | Jane      |  NMN       |                           | F      |     |               |               |               |              |               |              |                     |                | 
+         | mvi_FullName | mvi_MothersMaidenName | mvi_Gender | mvi_Phone | mvi_DOB | mvi_SSNLast4 | IEN | IENSourceSystem | responseCode |
+         |              |                       |            |           |         |              |     |                 | BSM400       |
+         | John Smith   |                       |            |           |         |              |     |                 | BSM200       |
+         | John Smith   |          Smithy       | Male       | 123456789 | 1/1/99  |     1234     | 123 |      ADR        | BSM200       |
+
+Scenario Outline: Reject a request with a malformed request
+ Given the personBSMservice receives a "<malformedRequest>"
+ Then the service will return "<BSMresponse>"
+ And the request will be stored in an audit table and will not be tended
+ 
+ |  malformedRequest |  
 
 Scenario Outline: Splitting and Storing BIOS
 Given An update containing "<biosEntering>" comes into the BSM
@@ -62,45 +71,7 @@ Examples:
       | phone, address, email | phone, address        |            | true           | false           | true              | 
       | email                 | email                 |            | false          | true            | false             | 
 
-#This call is made by the contact info hub
- Scenario:
-    Given an address with a valid person is sent to the exception queue
-      And the person exists in MVI
-     When the system makes a 1306 Get correlated IDs call
-     And gets the following fields 
-      | fieldsFrom1306            | 
-      | LastName                  | 
-      | FirstName                 | 
-      | MiddleName                | 
-      | Mothers Maiden Name (MMN) | 
-      | Gender                    | 
-      | SSN                       | 
-      | Address Line1             | 
-      | Address Line2             | 
-      | Address Line3             | 
-      | Address City              | 
-      | Address State             | 
-      | Phone Number              | 
-      | Date of Birth (DOB)       | 
-      
-     Then "FirstName" "MiddleName" and "LastName" will be concatenated in the format "FirstName" "MiddleName" "LastName"
-       And copied into the field "mviFullName" 
-       And "<SSN>" will be shortened to "<lastFourSSN>"
-       Examples:
-      | SSN         | lastFourSSN | 
-      | 123 45 6789 | 6789        | 
-      | 987 65 4321 | 4321        | 
-      | null        | null        | 
- 
-       And the system willreceive the following mapped fields to send to the BSM as a Person Identity Object
-       
-      | fieldsFrom1306                      | bsmFields             | 
-      | "FirstName" "MiddleName" "LastName" | mvi_FullName          | 
-      | Mothers Maiden Name (MMN)           | mvi_MothersMaidenName | 
-      | Gender                              | mvi_Gender            | 
-      | Phone Number                        | mvi_Phone             | 
-      | Date of Birth (DOB)                 | mvi_DOB               | 
-      | SSN                                 | mvi_SSNLast4          | 
+
       
 
   
