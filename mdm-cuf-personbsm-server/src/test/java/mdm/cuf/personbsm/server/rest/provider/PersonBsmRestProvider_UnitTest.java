@@ -13,8 +13,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import mdm.cuf.core.server.AbstractMdmCufCoreHubOrMemberServerSpringTest;
 import mdm.cuf.core.server.security.MdmCufCoreServerSecurityConfig;
 import mdm.cuf.personbsm.api.PersonBsmCorrectedBioRequest;
@@ -56,6 +54,54 @@ public class PersonBsmRestProvider_UnitTest extends PersonBsmServerSpringTestBas
 
         HttpEntity<PersonBsmErrorRequest> requestEntity =
                 new HttpEntity<>(PersonBsmService_UnitTest.getSubmitPersonBsmErrorRequest(true));
+
+        ResponseEntity<PersonBsmErrorResponse> responseEntity =
+                restTemplate.postForEntity(personBsmSubmitErrorUrl, requestEntity, PersonBsmErrorResponse.class);
+        
+        Assert.assertNotNull(responseEntity.getBody());
+        Assert.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        Assert.assertNotNull(responseEntity.getBody().getMessages());
+        Assert.assertTrue(responseEntity.getBody().getMessages().size()==1);
+        Assert.assertEquals("GOT_IT",responseEntity.getBody().getMessages().get(0).getKey());
+    }
+    
+    @Test
+    public void personBsmSubmitErrorTestEmail() {
+
+        HttpEntity<PersonBsmErrorRequest> requestEntity =
+                new HttpEntity<>(PersonBsmService_UnitTest.getSubmitPersonBsmErrorRequestEmail());
+
+        ResponseEntity<PersonBsmErrorResponse> responseEntity =
+                restTemplate.postForEntity(personBsmSubmitErrorUrl, requestEntity, PersonBsmErrorResponse.class);
+        
+        Assert.assertNotNull(responseEntity.getBody());
+        Assert.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        Assert.assertNotNull(responseEntity.getBody().getMessages());
+        Assert.assertTrue(responseEntity.getBody().getMessages().size()==1);
+        Assert.assertEquals("GOT_IT",responseEntity.getBody().getMessages().get(0).getKey());
+    }
+    
+    @Test
+    public void personBsmSubmitErrorTestAddress() {
+
+        HttpEntity<PersonBsmErrorRequest> requestEntity =
+                new HttpEntity<>(PersonBsmService_UnitTest.getSubmitPersonBsmErrorRequestAddress());
+
+        ResponseEntity<PersonBsmErrorResponse> responseEntity =
+                restTemplate.postForEntity(personBsmSubmitErrorUrl, requestEntity, PersonBsmErrorResponse.class);
+        
+        Assert.assertNotNull(responseEntity.getBody());
+        Assert.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        Assert.assertNotNull(responseEntity.getBody().getMessages());
+        Assert.assertTrue(responseEntity.getBody().getMessages().size()==1);
+        Assert.assertEquals("GOT_IT",responseEntity.getBody().getMessages().get(0).getKey());
+    }
+    
+    @Test
+    public void personBsmSubmitErrorTestTelephone() {
+
+        HttpEntity<PersonBsmErrorRequest> requestEntity =
+                new HttpEntity<>(PersonBsmService_UnitTest.getSubmitPersonBsmErrorRequestTelephone());
 
         ResponseEntity<PersonBsmErrorResponse> responseEntity =
                 restTemplate.postForEntity(personBsmSubmitErrorUrl, requestEntity, PersonBsmErrorResponse.class);
