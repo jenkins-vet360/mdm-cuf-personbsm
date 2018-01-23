@@ -17,35 +17,17 @@ Feature: the request and response objects for the BSM will be identical, this fe
       | potentiallySelfCorrectingOnRetry | boolean | 
       | severity                         | string  | 
 
-    Given a valid personTraits:
-      | attributeName           | type     | 
-      | correlationTimeMillis   | datetime | 
-      | createDate              | datetime | 
-      | dob                     | date     | 
-      | firstName               | string   | 
-      | gender                  | string   | 
-      | lastName                | string   | 
-      | middleName              | string   | 
-      | mviCorrelations         | array    | 
-      | originatingSourceSystem | string   | 
-      | otherIdentifiers        | object   | 
-      | sourceDate              | datetime | 
-      | sourceSystem            | string   | 
-      | sourceSystemUser        | string   | 
-      | txAuditId               | string   | 
-      | updateDate              | datetime | 
-      | versionHash             | ??       | 
-      | vet360Id                | ??       | 
-  
-  And given the otherIdentifiers object can be defined as:
-      | attributeName | type   | 
-      | edipn         | string | 
-      | enrollmentIen | string | 
-      | filenumber    | string | 
-      | icn           | string | 
-      | pid           | string | 
-      | vet360Id      | string | 
-  
+    Given a valid personTraits:       
+      | fields                | type   | 
+      | mvi_FullName          | string | 
+      | mvi_MothersMaidenName | string | 
+      | mvi_Gender            | string | 
+      | mvi_Phone             | string | 
+      | mvi_DOB               | string | 
+      | mvi_SSNLast4          | string | 
+      | IEN                   | string | 
+      | IENSourceSystem       | string | 
+	
 
    #Pending CR add county fields- use requirements from CI feature file
     With Address Objects:
